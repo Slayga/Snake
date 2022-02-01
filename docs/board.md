@@ -61,3 +61,6 @@ Takes Tk() or toplevel widget as argument, Snake creates window in main.py. (See
 ### <li> callable_: Callable = None
 
 </ol>
+
+/// Note 2022-02-01.<br/>
+Not finished need drastic improvements and simplification with examples of code...
