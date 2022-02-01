@@ -24,12 +24,12 @@ class GameBoard:
 
         self.score = 0
 
-        # Tk() ... CHANGE AT OWN RISK
+        # /-------- Tk() | Change at own risk ---------/ #
         # Scaler is to get the screen to fit the size of the playarea.
         self.__scaler = 45.8 + (1 / 3)  # => (46.1333333)
         self.__tk_x = int((self.x_max + 1) * self.__scaler)
         self.window.resizable(0, 0)
-        self.window.geometry(f"{self.__tk_x}x{int(self.__tk_x+(2*45.8+(1/3)))}")
+        self.window.geometry(f"{self.__tk_x}x{int(self.__tk_x+(2*self.__scaler))}")
         self.window.title("Snake3.1")
         self.window.configure(bg="white")
         # /-------------- End of Tk() --------------/ #
@@ -54,7 +54,7 @@ class GameBoard:
             raise TypeError("Non callable value")
 
     def display_text(self, text=None):
-        self.scoreboard.config(text=(None if text is None else text))
+        self.scoreboard.config(text=text)
 
     def update_score(self):
         self.score += 1
@@ -108,6 +108,9 @@ class GameBoard:
                 )
                 self.__xlbl.grid(row=y, column=x, sticky=N + S + E + W)
                 self.__lbls[y].append(self.__xlbl)
+
+        # Deleting temporary variables from memory
+        del self.__rbg, self.__xlbl
 
     def __create_ui(self):
         # // TODO
