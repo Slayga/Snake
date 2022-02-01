@@ -5,8 +5,8 @@ Info:
 Head Module
 """
 from tkinter import Tk, Label, N, S, W, E
-from board import GameBoard
-from tail import Tail
+from .board import GameBoard
+from .tail import Tail
 
 
 class Head:

@@ -5,9 +5,9 @@ Info:
 Berry Module
 """
 from tkinter import Label, N, S, W, E
-from head import Head
-from board import GameBoard
-from tail import Tail
+from .head import Head
+from .board import GameBoard
+from .tail import Tail
 from random import randint
 
 
