@@ -11,21 +11,6 @@ from typing import Callable
 
 
 class GameBoard:
-    _isinstance = None
-
-    # Singletone method... Forces that only ONE object can exist of the class
-    def __new__(cls,
-                window: Tk,
-                size: int,
-                colors: list,
-                callable: Callable = None):
-
-        if cls._isinstance is None:
-            cls._isinstance = True
-            return super().__new__(cls)
-        else:
-            return cls
-
     def __init__(self,
                  window: Tk,
                  size: int,
