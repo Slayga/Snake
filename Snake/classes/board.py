@@ -80,6 +80,40 @@ class GameBoard:
         self.__lbl = dict()
 
         # // TODO
+        # Creates game bounds...
+        # Starts with looping over every y-row
+        for y in range(self.y_min, self.y_max):
+            # self.__lbl => {1:[], 2:[], 3:[] ... y:[]}
+            self.__lbl[y] = list()
+            # The key is the y coordinate, and the value is a list of all x
+            # coordinates as Labels
+
+            # Scales the label to fit window size
+            Grid.rowconfigure(self.window, y, weight=1)
+
+            # Adds empty values to the void of the "world" or you can call it a border
+            for _ in range(0, self.x_min):
+                self.__lbl[y].append(None)
+
+            for i in range(0, self.y_min):
+                self.__lbl[i] = None
+
+            # Create every label
+            for x in range(self.x_min, self.x_max):
+                # Scales the label to fit window size
+                Grid.columnconfigure(self.window, x, weight=1)
+                self.__rbg = r_choice(self.colors)
+                self.__xlbl = Label(
+                    self.window,
+                    bg=self.__rbg,
+                )
+                self.__xlbl.grid(row=y, column=x, sticky=N + S + E + W)
+                self.__lbl[y].append(self.__xlbl)
+
+        return self.__lbl
+
+    def __create_ui(self):
+        # // TODO
         # Create scorebar & controller-bar at the top
         self.scoreboard = Label(
             self.window,
@@ -92,31 +126,9 @@ class GameBoard:
         self.control.grid(column=1, row=0)
         self.control.bind("<KeyPress>", self.get_dir)
 
-        # // TODO
-        # Creates game bounds...
-        # Starts with looping over every y-row
-        for y in range(self.y_min, self.y_max):
-            # self.__lbl => {1:[], 2:[], 3:[] ... y:[]}
-            # The key is the y coordinate, and the value is a list of all x
-            # coordinates as Labels
-            self.__lbl[y] = list()
-            Grid.rowconfigure(self.window, y, weight=1)
 
-            # Adds empty values to the void of the "world"
-            for _ in range(0, self.x_min):
-                self.__lbl[y].append(None)
+if __name__ == "__main__":
+    window = Tk()
+    GameBoard(window, 12, ["#d8de81", "#ffde88"])
 
-            for i in range(0, self.y_min):
-                self.__lbl[i] = None
-
-            for x in range(self.x_min, self.x_max):
-                Grid.columnconfigure(self.window, x, weight=1)
-                self.__rbg = r_choice(self.colors)
-                self.__xlbl = Label(
-                    self.window,
-                    bg=self.__rbg,
-                )
-                self.__xlbl.grid(row=y, column=x, sticky=N + S + E + W)
-                self.__lbl[y].append(self.__xlbl)
-
-        return self.__lbl
+    window.mainloop()
