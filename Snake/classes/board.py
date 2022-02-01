@@ -11,11 +11,7 @@ from typing import Callable
 
 
 class GameBoard:
-    def __init__(self,
-                 window: Tk,
-                 size: int,
-                 colors: list,
-                 callable_: Callable = None):
+    def __init__(self, window: Tk, size: int, colors: list, callable_: Callable = None):
 
         self.window = window
         # Borders of the game board
@@ -34,8 +30,7 @@ class GameBoard:
         self.__scaler = 45.8 + (1 / 3)  # => (45.8333333)
         self.__tk_x = int((self.x_max + 1) * self.__scaler)
         self.window.resizable(0, 0)
-        self.window.geometry(
-            f"{self.__tk_x}x{int(self.__tk_x+(2*45.8+(1/3)))}")
+        self.window.geometry(f"{self.__tk_x}x{int(self.__tk_x+(2*45.8+(1/3)))}")
         self.window.title("Snake3.1")
         self.window.configure(bg="white")
 
@@ -57,6 +52,8 @@ class GameBoard:
     def callable(self, value):
         if callable(value):
             self._callable_ = value
+        else:
+            raise TypeError("Non callable value")
 
     def display_text(self, text=None):
         self.scoreboard.config(text=(None if text is None else text))
@@ -87,7 +84,8 @@ class GameBoard:
         self.scoreboard = Label(
             self.window,
             text=f"Press {', '.join(i for i in self.possible_dir)} to start",
-            bg="white")
+            bg="white",
+        )
         self.scoreboard.grid(column=1, row=0, columnspan=self.x_max)
 
         self.control = Label(self.window, bg="white")
