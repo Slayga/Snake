@@ -17,9 +17,8 @@ class GameBoard:
         # Borders of the game board
         self.x_min = 1
         self.y_min = 1
-        # Makes sure the board is at least 2 in width
-        self.x_max = size if size >= 3 else 12
-        self.y_max = size if size >= 3 else 12
+        # Makes sure the board is at least 2 in width, sets x_max and y_max to same value
+        self.x_max = self.y_max = size if size > 2 else 12
 
         self.colors = colors
 
@@ -27,22 +26,21 @@ class GameBoard:
 
         # Tk() ... CHANGE AT OWN RISK
         # Scaler is to get the screen to fit the size of the playarea.
-        self.__scaler = 45.8 + (1 / 3)  # => (45.8333333)
+        self.__scaler = 45.8 + (1 / 3)  # => (46.1333333)
         self.__tk_x = int((self.x_max + 1) * self.__scaler)
         self.window.resizable(0, 0)
         self.window.geometry(f"{self.__tk_x}x{int(self.__tk_x+(2*45.8+(1/3)))}")
         self.window.title("Snake3.1")
         self.window.configure(bg="white")
+        # /-------------- End of Tk() --------------/ #
 
         self._callable_ = callable_ if callable(callable_) else None
 
-        self.scoreboard = Label
-        self.control = Label
+        # Allowed keypresses for changing direction
         self.possible_dir = ["Up", "Down", "Left", "Right", "d", "a", "w", "s"]
-        # Creating the "play area" for the game aka bounds
-        self.__lbls = self.__create_board_grid()
-        # To clear up memory
-        del self.__lbl
+        # Creating the "play area" for the game aka bounds & ui after
+        self.__create_board_grid()
+        self.__create_ui()
 
     @property
     def callable_(self):
@@ -63,10 +61,11 @@ class GameBoard:
         self.scoreboard.config(text=self.score - 1)
 
     def run(self):
+        # Make sure the control is listening for keyboard events
         self.control.focus()
         return True
 
-    def get_lbls(self) -> dict[Label]:
+    def get_lbls(self) -> dict[list[Label]]:
         return self.__lbls
 
     def get_dir(self, event) -> str:
@@ -77,14 +76,14 @@ class GameBoard:
         return
 
     def __create_board_grid(self) -> dict:
-        self.__lbl = dict()
+        self.__lbls = dict()
 
         # // TODO
         # Creates game bounds...
         # Starts with looping over every y-row
         for y in range(self.y_min, self.y_max):
-            # self.__lbl => {1:[], 2:[], 3:[] ... y:[]}
-            self.__lbl[y] = list()
+            # self.__lbls => {1:[], 2:[], 3:[] ... y:[]}
+            self.__lbls[y] = list()
             # The key is the y coordinate, and the value is a list of all x
             # coordinates as Labels
 
@@ -93,10 +92,10 @@ class GameBoard:
 
             # Adds empty values to the void of the "world" or you can call it a border
             for _ in range(0, self.x_min):
-                self.__lbl[y].append(None)
+                self.__lbls[y].append(None)
 
             for i in range(0, self.y_min):
-                self.__lbl[i] = None
+                self.__lbls[i] = None
 
             # Create every label
             for x in range(self.x_min, self.x_max):
@@ -108,9 +107,7 @@ class GameBoard:
                     bg=self.__rbg,
                 )
                 self.__xlbl.grid(row=y, column=x, sticky=N + S + E + W)
-                self.__lbl[y].append(self.__xlbl)
-
-        return self.__lbl
+                self.__lbls[y].append(self.__xlbl)
 
     def __create_ui(self):
         # // TODO
@@ -129,6 +126,8 @@ class GameBoard:
 
 if __name__ == "__main__":
     window = Tk()
-    GameBoard(window, 12, ["#d8de81", "#ffde88"])
+    board = GameBoard(window, 12, ["#d8de81", "#ffde88"])
+
+    board.get_lbls()
 
     window.mainloop()
