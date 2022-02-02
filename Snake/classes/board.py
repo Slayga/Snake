@@ -88,7 +88,7 @@ class GameBoard:
 
     def display_text(self, text=None):
         """Overrides the text in scoreboard.
-        Updated automatically with update_score()
+        Resets automatically with update_score()
 
         Args:
             text (Any, optional): What will be displayed instead of score

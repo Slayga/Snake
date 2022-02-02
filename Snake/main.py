@@ -17,7 +17,12 @@ class Snake3:
         self.game_tk = Tk()
         self.board = GameBoard(self.game_tk, 12, ["#d8de81", "#ffde88"])
         self.head = Head(
-            self.game_tk, "🐍", "red", "green", int(self.board.x_max / 2)
+            self.game_tk,
+            self.board,
+            "🐍",
+            "red",
+            "green",
+            int(self.board.x_max / 2),
         )
 
         self.board._callable_ = self.head.change_direction
@@ -40,7 +45,7 @@ class Snake3:
             self.head.update()
 
             # Move check is called here.
-            if self.head.check_collision(self.board, self.head.tail):
+            if self.head.check_collision(self.head.tail):
                 # When the check returns true regrids the head
                 self.head.move()
                 # If a berry is consumed
@@ -50,24 +55,10 @@ class Snake3:
                     # Regrids the berry
                     self.berry.grid(self.board, self.head, self.head.tail)
 
-                # Tail drawing should go here..... #TODO Implement tail drawing in tail module... @Slayga
-                # ? Currently moving tail module to be called inside head module...move this @Slayga
+                # // #TODO Implement tail drawing in tail module...
+                # Draws the tail when one or more berry have been consumed
                 if self.board.score > 1:
-                    labels = self.board.get_lbls()
-                    newTail = labels[self.head.y][self.head.x]
-                    old_color = newTail.cget("bg")
-                    self.game_tk.after(
-                        (250 * self.board.score),
-                        lambda newTail=newTail, old_color=old_color: newTail.config(
-                            bg=old_color
-                        ),
-                    )
-                    self.game_tk.after(
-                        250,
-                        lambda newTail=newTail, tail_color=self.head.tail_color: newTail.config(
-                            bg=tail_color
-                        ),
-                    )
+                    self.head.tail.update()
             # When all checks and updates are done,
             # queues next update after x ms time.
             self.game_tk.after(250, self.update)
