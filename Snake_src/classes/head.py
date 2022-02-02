@@ -14,6 +14,7 @@ class Head:
         self,
         window: Tk,
         board: GameBoard,
+        update_speed: int,
         appearance: str,
         head_color: str,
         tail_color: str,
@@ -23,7 +24,11 @@ class Head:
 
         self.window = window
         self.board = board
+        self.update_speed = update_speed
+
+        #! Not Implemented !#
         self.appearance = appearance
+
         self.head_color = head_color
         self.tail_color = tail_color
         self.start_pos = start_pos
@@ -45,7 +50,9 @@ class Head:
             column=self.start_pos, row=self.start_pos, sticky=N + S + W + E
         )
 
-        self.tail = Tail(self.window, self, self.board, self.tail_color)
+        self.tail = Tail(
+            self.window, self, self.board, self.update_speed, self.tail_color
+        )
 
     def opposite_dir(self, dir) -> str:
         if dir == "Right":

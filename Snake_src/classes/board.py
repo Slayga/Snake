@@ -129,6 +129,7 @@ class GameBoard:
         Returns:
             Void
         """
+        # keysym is the key name that is pressed
         if self.score < 1 and event.keysym in self.possible_dir:
             self.update_score()
         if event.keysym in self.possible_dir:
