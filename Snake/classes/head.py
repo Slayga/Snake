@@ -44,23 +44,26 @@ class Head:
         self.tail = Tail(self.window, self.tail_color)
 
     def opposite_dir(self, dir) -> str:
-        match dir:
-            case "Right":
-                return "Left"
-            case "Left":
-                return "Right"
-            case "Up":
-                return "Down"
-            case "Down":
-                return "Up"
-            case "d":
-                return "a"
-            case "a":
-                return "d"
-            case "w":
-                return "s"
-            case "s":
-                return "w"
+        if dir == "Right":
+            return "Left"
+
+        elif dir == "Left":
+            return "Right"
+
+        elif dir == "Up":
+            return "Down"
+
+        elif dir == "Down":
+            return "Up"
+
+        elif dir == "d":
+            return "a"
+
+        elif dir == "a":
+            return "d"
+
+        elif dir == "w":
+            return "s"
 
     def change_direction(self, value=None):
         if value is not None:
@@ -68,23 +71,29 @@ class Head:
             self.direction = value
 
     def update(self):
-        match self.direction:
-            case "Right":
-                self.x += 1
-            case "Left":
-                self.x -= 1
-            case "Up":
-                self.y -= 1
-            case "Down":
-                self.y += 1
-            case "d":
-                self.x += 1
-            case "a":
-                self.x -= 1
-            case "w":
-                self.y -= 1
-            case "s":
-                self.y += 1
+        if self.direction == "Right":
+            self.x += 1
+
+        elif self.direction == "Left":
+            self.x -= 1
+
+        elif self.direction == "Up":
+            self.y -= 1
+
+        elif self.direction == "Down":
+            self.y += 1
+
+        elif self.direction == "d":
+            self.x += 1
+
+        elif self.direction == "a":
+            self.x -= 1
+
+        elif self.direction == "w":
+            self.y -= 1
+
+        elif self.direction == "s":
+            self.y += 1
 
     def check_collision(
         self, board: GameBoard, tail: Tail, spike: object = None
