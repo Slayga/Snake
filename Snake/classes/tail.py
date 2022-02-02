@@ -8,11 +8,9 @@ from tkinter import Tk, Label
 from typing import Tuple
 from .board import GameBoard
 
-# from .head import Head
-
 
 class Tail:
-    def __init__(self, window: Tk, head, board: GameBoard, color: str):
+    def __init__(self, window: Tk, head: object, board: GameBoard, color: str):
         self.window = window
         self.head = head
         self.board = board
