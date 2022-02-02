@@ -35,13 +35,19 @@ class Snake3:
     def update(self):
         if self.head.alive:
             # !Always update head first! #
+            # What the update does is moving the heads coordinates onto next
+            # square and check if that move will be valid
             self.head.update()
 
+            # Move check is called here.
             if self.head.check_collision(self.board, self.head.tail):
+                # When the check returns true regrids the head
                 self.head.move()
+                # If a berry is consumed
                 if (self.berry.x, self.berry.y) == (self.head.x, self.head.y):
                     self.board.update_score()
                     self.head.tail.length += 1
+                    # Regrids the berry
                     self.berry.grid(self.board, self.head, self.head.tail)
 
                 # Tail drawing should go here..... #TODO Implement tail drawing in tail module... @Slayga
@@ -62,10 +68,12 @@ class Snake3:
                             bg=tail_color
                         ),
                     )
-
+            # When all checks and updates are done,
+            # queues next update after x ms time.
             self.game_tk.after(250, self.update)
 
         else:
+            # Stops the snake & change to its death color.
             self.head.kill()
 
 

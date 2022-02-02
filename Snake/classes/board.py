@@ -87,7 +87,7 @@ class GameBoard:
             raise TypeError("Non callable value")
 
     def display_text(self, text=None):
-        """Overrides the text in scorboard.
+        """Overrides the text in scoreboard.
         Updated automatically with update_score()
 
         Args:

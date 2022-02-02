@@ -12,19 +12,21 @@ from random import randint
 
 
 class Berry:
-    def __init__(self, window, apperance):
+    def __init__(self, window, appearance):
         self.window = window
-        self.apperance = apperance
+        self.appearance = appearance
         self.x = None
         self.y = None
 
-        self.lbl_berry = Label(self.window, bg=f"{self.apperance}")
+        self.lbl_berry = Label(self.window, bg=f"{self.appearance}")
 
     def run(self):
         ...
 
     def grid(self, board: GameBoard, snake: Head, tail: Tail):
         lbl = board.get_lbls()
+        # Will regrid the berry until it is in a valid position.
+        # Not on tail or head...
         while True:
             self.x, self.y = randint(board.x_min, board.x_max - 1), randint(
                 board.y_min, board.y_max - 1
