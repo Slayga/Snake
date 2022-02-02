@@ -19,8 +19,8 @@ class Snake3:
         self.head = Head(
             self.game_tk, "🐍", "red", "green", int(self.board.x_max / 2)
         )
-        self.board._callable_ = self.head.change_direction
 
+        self.board._callable_ = self.head.change_direction
         self.berry = Berry(self.game_tk, "blue")
 
     def run(self):
@@ -29,14 +29,14 @@ class Snake3:
             # self.tail.run()
             self.update()
 
-        # END OF FUNCTION #
+        # END OF FUNCTION Tk().mainloop() executed last#
         self.game_tk.mainloop()
 
     def update(self):
         if self.head.alive:
             # !Always update head first! #
             self.head.update()
-            # !=========================! #
+
             if self.head.check_collision(self.board, self.head.tail):
                 self.head.move()
                 if (self.berry.x, self.berry.y) == (self.head.x, self.head.y):
