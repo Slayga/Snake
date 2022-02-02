@@ -13,14 +13,14 @@ class Head:
     def __init__(
         self,
         window: Tk,
-        apperance: str,
+        appearance: str,
         head_color: str,
         tail_color: str,
         start_pos: int,
         audio: bool = False,
     ):
         self.window = window
-        self.apperance = apperance
+        self.appearance = appearance
         self.head_color = head_color
         self.tail_color = tail_color
         self.start_pos = start_pos
@@ -66,11 +66,22 @@ class Head:
             return "s"
 
     def change_direction(self, value=None):
+        """
+        Called when changing direction is desired.
+
+        Args:
+            value (str, optional): What direction: "Left", "Right", "a", "d".
+            Defaults to None.
+        """
         if value is not None:
             self.old_direction = self.direction
             self.direction = value
 
     def update(self):
+        """
+        Update the appropriate coordinate variable depending on the
+        direction of the head
+        """
         if self.direction == "Right":
             self.x += 1
 
@@ -98,7 +109,8 @@ class Head:
     def check_collision(
         self, board: GameBoard, tail: Tail, spike: object = None
     ):
-        lbl = board.get_lbls()
+
+        lbls = board.get_lbls()
         # Check if head is out of bounds
         if (
             self.x >= board.x_max
@@ -106,25 +118,28 @@ class Head:
             or self.y >= board.y_max
             or self.y < board.y_min
         ):
-            self.alive = None
-            return False
+            self.alive = False
         # Check if head is turning in to itself when it has a tail
         elif (
             self.old_direction == self.opposite_dir(self.direction)
             and board.score > 1
         ):
-            self.alive = None
-            return False
-        # Check if head collides with the tail
-        elif lbl[self.y][self.x].cget("bg") == tail.color and board.score > 1:
-            self.alive = None
-            return False
+            self.alive = False
+
+        # Check if head collide with the tail
+        elif lbls[self.y][self.x].cget("bg") == tail.color and board.score > 1:
+            self.alive = False
+
         # If spike is in the game, checks collision for that...
-        if spike is not None:
-            if lbl[self.y][self.x].cget("text") == spike.apperance:
-                self.alive = None
-                return False
-        return True
+        # !NOT IMPLEMENTED !#
+        # if spike is not None:
+        #     if lbls[self.y][self.x].cget("text") == spike.appearance:
+        #         self.alive = False
+
+        if self.alive:
+            return True
+        else:
+            return False
 
     def move(self):
         self.lbl_head.grid(row=self.y, column=self.x)
