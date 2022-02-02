@@ -66,6 +66,7 @@ class GameBoard:
         self.window.configure(bg="white")
         # /-------------- End of Tk() --------------/ #
 
+        # Placeholder for the callable function outside of this class
         self._callable_ = callable_ if callable(callable_) else None
 
         # Allowed keypresses for changing direction
