@@ -3,6 +3,7 @@ A python project. That aims to make snake using tkinter in an object oriented pr
 
 ### Running / executing
 For just running the program execute the [main.py](Snake_src/main.py) in Snake_src. 
+Note requirements are tkinter and random library which are default installed with python
 
 ### Source code 
 Source code is allocated in [Snake_src](Snake_src) folder. Begin breakdown in main.py. Main.py import modules from [classes](Snake_src/classes) folder.
