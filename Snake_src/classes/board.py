@@ -120,14 +120,14 @@ class GameBoard:
         """
         return self.__lbls
 
-    def get_dir(self, event) -> str:
+    def get_dir(self, event) -> None:
         """Event listener for keyboard events calls the callable:_
         Also awaits for start in beginning (when score less than 1).
         Args:
             event (str): Where keyboard stroke gets passed
 
         Returns:
-            Void
+            None
         """
         # keysym is the key name that is pressed
         if self.score < 1 and event.keysym in self.possible_dir:
