@@ -10,14 +10,8 @@ from .board import GameBoard
 
 
 class Tail:
-    def __init__(
-        self,
-        window: Tk,
-        head: object,
-        board: GameBoard,
-        update_speed,
-        color: str,
-    ):
+    def __init__(self, window: Tk, head: object, board: GameBoard,
+                 update_speed, color: str):
         self.window = window
         self.head = head
         self.board = board
@@ -36,13 +30,11 @@ class Tail:
 
         self.window.after(
             (self.update_speed * self.board.score),
-            lambda newTail=self.__newTail, old_color=self.__old_color: newTail.config(
-                bg=old_color
-            ),
+            lambda newTail=self.__newTail, old_color=self.__old_color: newTail.
+            config(bg=old_color),
         )
         self.window.after(
             self.update_speed,
-            lambda newTail=self.__newTail, tail_color=self.head.tail_color: newTail.config(
-                bg=tail_color
-            ),
+            lambda newTail=self.__newTail, tail_color=self.head.tail_color:
+            newTail.config(bg=tail_color),
         )
