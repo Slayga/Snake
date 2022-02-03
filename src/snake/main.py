@@ -16,7 +16,6 @@ class Snake3:
     """
     Main handler of all the modules. Main running code
     """
-
     def __init__(self):
         """
         Constructor and initialize all the modules.
@@ -44,7 +43,7 @@ class Snake3:
 
     def run(self):
         if self.board.run():
-            self.berry.grid(self.board, self.head, self.head.tail)
+            self.berry.grid(self.board, self.head)
             # self.tail.run()
             self.update()
 
@@ -67,7 +66,7 @@ class Snake3:
                     self.board.update_score()
                     self.head.tail.length += 1
                     # Regrids the berry
-                    self.berry.grid(self.board, self.head, self.head.tail)
+                    self.berry.grid(self.board, self.head)
 
                 # // #TODO Implement tail drawing in tail module...
                 # Draws the tail when one or more berry have been consumed
