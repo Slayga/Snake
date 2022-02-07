@@ -1,5 +1,5 @@
 # Visual Studio Code Extensions
-Relevant extensions used to edit & handle the project<br>
+Relevant extensions used to edit & handle the project. Not required except for python<br>
 
 ## Extension list
 _"Extension name" "(extension id)"_
