@@ -5,6 +5,8 @@
 
 3. Implement score saving to txt file or something...Highscore...
     3.1. Commenting and documentation
+    3.2. Implement spike module
+    3.3. Implement apperances?
 
 4. Overview and quality control...
     4.1. Can stuff be simplified or change for better?
@@ -12,3 +14,5 @@
     4.3. ?
 
 5. Finally overview again and possibly return to 4. If there is more improvements needed...
+
+* Additional...
