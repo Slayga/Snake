@@ -1,5 +1,5 @@
 # Snake
-A python project. That aims to make snake using tkinter in an object oriented programming
+A python project. That aims to make snake using tkinter and object oriented programming. This is made just for fun but also for learning.
 
 ## Running / executing
 For just running the program execute the [main.py](src/snake/main.py) in Snake_src. 
